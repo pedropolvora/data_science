@@ -83,3 +83,51 @@ This can be written in a way that outputs a minimum number n of samples you need
 specification of power, signficance level and change.
 
 
+## Is the distribution of the metric gaussian ? 
+
+The vast majority of the A/B tests use the `t-test`.
+This test assumes that both populations have a gaussian distribution.
+
+But it could very well be that the distribution is *not* gaussian.
+
+Although in most cases where,
+1. The metric is an average,
+1. The distribution has one mode,
+1. The distribution is symmetric 
+
+we could assume it's gaussian, in pratical terms it's quite possible that these conditions 
+are **not** met.
+
+Here are some empirical ways of mitigating the violation:
+
+1. If the metric is nonnegative and has long tail (e.g. a count) take the log transform
+1. Alternatively, the family of power transforms tends to stabilize the variance
+1. The negative binomial is a better distribution for counts
+1. If it's completely different (i.e the histogram) use a test that does not make the Gaussian assumption such as the Mann-Whitney test.
+
+## Are the Variances Equal ? 
+
+Even if both populations are gaussian, it can happen that the variances are not equal.
+This could be a consequence of e.g. very different population sizes.
+
+In this case, you should use another test like the **Welch's t-test**.
+
+
+## What does the p-value mean ?
+
+[read this](http://bactra.org/weblog/1111.html)
+
+**A small p-value does not imply a significant result**
+
+**A smaller p-value does not imply a more significant result**
+
+In addition to running the hypothesis testing and computing the p-value we
+**should compute the confidence interval of the two population mean estimates**.
+If the distribution is close to being Gaussian the usual standard error estimation applies.
+Otherwise, compute a bootstrap estimate.
+
+Basically this should allows to differentiate between
+* "There indeed a significant difference between the two populations"
+* "I can't tell whether there is a difference because the variances of the estimates are too high"
+
+
