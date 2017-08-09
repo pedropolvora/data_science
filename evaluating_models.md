@@ -76,9 +76,9 @@ Examples: Search or recommendation engines.
 
 #### Precision-Recall
 
-*Precision: Out of the items the ranker/classifier predicted to be relevant, how many are truly relevant?
+* Precision: Out of the items the ranker/classifier predicted to be relevant, how many are truly relevant?
 
-*Recall: Out of the items the ranker/classifier predicted to be relevant, how many were found?
+* Recall: Out of the items the ranker/classifier predicted to be relevant, how many were found?
 
 
 ``` 
@@ -111,11 +111,64 @@ Normalized Discounted Cumulative Gain.
 
 * Cumulative Gain:  Sums up the relevance of the top k items 
 * Discounted CG: Discounts the items further down the List 
-*NDCG: Divides the DCG by the perfect DCG
+* NDCG: Divides the DCG by the perfect DCG
+
+## Regression Metrics
+
+Predicting numerical values/scores.
 
 
+#### RMSE 
+
+Root-Mean-Square-Error
+
+```
+RMSE = Sqrt(Sum (y_i - y^_i)^2 )/n)
+``` 
+Where `y_i` denotes the real value and `y^_i` denotes the observed value, 
+and we have `n` the number of observations.
+
+*Pitfalls* : Not robust to outliers, note the quadratic term.
+
+#### Quantiles of Errors
+
+Quantiles are much more robust that the mean of a distribution.
+They can be used for robust estimatores of performance,
+
+``` 
+MAPE = median(|y_i - y^_i) / y_i|)
+``` 
+
+We could also use the 90th percentil has a worst case scenario behavior.
+
+#### Almost Correct Predictions 
+
+We can also define the percent of estimates that differ from the true value by `X%`.
 
 
+#### Training vs Evalutation Metrics
+
+We can use a different loss function  in the training procedure
+than for evaluation. This usually happens when you're using a model
+for something it was not designed to do.
+
+*It's always better to train a method using the same metric as you'll use for evaluation*
+
+
+#### Skewed Datasets
+
+Always be on the look out for data skew, i.e., where one kind of data 
+is much more rare than others, or when very large or very samll outliers 
+could drastically change the metric.
+
+E.g. if we have 99% of data of NOT_SPAM type, then a trivial classifier
+that simply puts all the points to NOT_SPAM will have 99% accuracy and a
+great ROC.
+
+Note that data skew affects both training and evaluation.
+
+In case of outlies, we should use robust evaluaters (for the evaluation phase).
+Effective solutions for large outlies would include reformulating the task.
 
 
 `
