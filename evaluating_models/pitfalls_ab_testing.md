@@ -34,3 +34,52 @@ We can do some A/A testing to make sure that the test framework is sane
 (there should be no differences).
 
 ## Which Metric ?
+
+Ultimately the right metric is the business metric, but this might not be measurable 
+by the system.
+
+Here are the basic 4 types of metrics:
+* Business Metrics: LTV, CAC ...
+* Measurable Live Metrics: Unique visitors, session length ...
+* Offline Evaluation Metrics: Accuracy, RMSE ...
+* Training Metrics: Loss function in the training
+
+**The key is to make sure that the metric you are (can) use in your A/B testing is
+aligned with what you want overall.**
+
+## How Much Change Counts as Real Change? 
+
+Even with everything set-up, when does a change means a real change? It's subjective 
+but a good way to fight it is by setting up the value upfront and stick to it.
+
+## One-Sided or Two-Sided
+
+If your test is one-sided it only tests if the change is better without telling you
+if it's worse. 
+A two-sided test tells if you the change is either better or worse.
+
+## False Positives
+
+In this case a false positive is *rejecting the null hypothesis when
+the null hypothesis is true*.
+
+You have to be careful on how many false positives you can take, which depends
+on the application. 
+
+False positives are set by the significance level, 
+and false negatives by the pwoer of the test.
+
+Make sure they are Ok with the fundamentals of your test.
+
+## How many observations do you need
+
+Defined partially by the statistical power.
+
+A common **anti-pattern** is to do the test until you get a change,
+this is very **wrong**.
+
+The power of a test is the ability to correctly identify the positives.
+This can be written in a way that outputs a minimum number n of samples you need, upon
+specification of power, signficance level and change.
+
+
