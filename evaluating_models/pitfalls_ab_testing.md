@@ -130,4 +130,31 @@ Basically this should allows to differentiate between
 * "There indeed a significant difference between the two populations"
 * "I can't tell whether there is a difference because the variances of the estimates are too high"
 
+## Multiple Models 
 
+Having multiple models at the same time *can drastically increase* the rate of false positives.
+
+A modified procedure (called Benjamini-Hochberg) to deal with these situations is to reject the 
+null hypothesis for the smalles normalized p-values `p(i) < i/m*q` where `m` is the number of tests, `i` is the ranking
+of the p-value, and `q`is the significance.
+
+This can be useful even when you have models running one after the other on-line.
+
+## How long to Run the Test
+
+Besides what was discussed above, that a test has to be ran until you get 
+statistical significance, there are more considerations on why we should have  
+in mind.
+
+It could be ethical considerations on running the test too long (e.g. pharma industry).
+Or it could be **distribution drift**, where the behavior of the user changes 
+faster than one can collect enough observations.
+
+It's important to go beyond the **Novelty effect**, which is when users have 
+initial reactions different due to unique fact that the new *set-up* is new and 
+not because of the actual differences.
+
+Other issues such as seasonality are important.
+
+
+## Distribution drift
