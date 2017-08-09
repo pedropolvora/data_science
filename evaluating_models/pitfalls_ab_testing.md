@@ -156,7 +156,6 @@ not because of the actual differences.
 
 Other issues such as seasonality are important.
 
-
 ## Distribution drift
 
 A lot of the models assume that the distributions stay *stationary* but that's not 
@@ -164,3 +163,13 @@ always the case. When this is the case, it's called **distribution drift**.
 
 To catch it, it's useful to monitor offline metrics on live data in addition to online testing.
 If the offline metric changes significant then it's time to update the model and retrain it on new data
+
+## Multiarm Bandits (MAB)
+
+The name comes from gambling, a one-armed bandit is a slot-machine. 
+A bandit gives you a random payoff. 
+Multiarm bandits is like a room full of slot-machines. 
+Each incoming request is an arm pull, the MAB selects the model, forwards the request
+to the query to it, gives the answer to the user observes the behaviour and 
+adjusts the estimate for the payoff.
+
